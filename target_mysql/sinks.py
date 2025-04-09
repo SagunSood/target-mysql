@@ -688,7 +688,9 @@ class MySQLSink(SQLSink):
             upsert_on_condition = ", ".join(
                 [f"{key}=VALUES({key})" for key in join_keys]
             )
-            insert_sql += f" ON DUPLICATE KEY UPDATE {upsert_on_condition}"
+            #insert_sql += f" ON DUPLICATE KEY UPDATE {upsert_on_condition}"
+            insert_sql = str(insert_sql) + f" ON DUPLICATE KEY UPDATE {upsert_on_condition}"
+            insert_sql = sqlalchemy.text(insert_sql)
 
         if isinstance(insert_sql, str):
             insert_sql = sqlalchemy.text(insert_sql)
