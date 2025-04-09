@@ -32,3 +32,9 @@ plugins:
     - name: start_date
       value: '2010-01-01T00:00:00Z'
     - name: freeze_schema
+    - name: snakecase_names
+      kind: boolean
+      label: Use snake_case for table and column names
+      description: Converts names like 'tabPatient' to 'tab_patient' if true.
+      value: false  # Optional default
+
