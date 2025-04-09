@@ -24,6 +24,7 @@ requests = "^2.25.1"
 singer-sdk = ">=0.30.0,<1.0.0"
 mysqlclient = "^2.2.0"
 cryptography = "^41.0.2"
+pymysql = "^1.0.3"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.4.0"
