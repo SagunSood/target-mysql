@@ -780,6 +780,9 @@ class MySQLSink(SQLSink):
             # convert to snakecase
             name = self.snakecase(name)
 
+        if not super().config.get("snakecase_names", True):
+        return name
+
         if super().config.get("replace_leading_digit", True):
             # replace leading digit
             name = replace_leading_digit(name)
