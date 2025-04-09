@@ -689,11 +689,20 @@ class MySQLSink(SQLSink):
                 [f"{key}=VALUES({key})" for key in join_keys]
             )
             #insert_sql += f" ON DUPLICATE KEY UPDATE {upsert_on_condition}"
-            insert_sql = str(insert_sql) + f" ON DUPLICATE KEY UPDATE {upsert_on_condition}"
-            insert_sql = sqlalchemy.text(insert_sql)
+            # insert_sql = str(insert_sql) + f" ON DUPLICATE KEY UPDATE {upsert_on_condition}"
+            # insert_sql = sqlalchemy.text(insert_sql)
 
-        if isinstance(insert_sql, str):
-            insert_sql = sqlalchemy.text(insert_sql)
+        # if isinstance(insert_sql, str):
+        #     insert_sql = sqlalchemy.text(insert_sql)
+
+            # Patch: Convert to string and append upsert
+            if not isinstance(insert_sql, str):
+                insert_sql = str(insert_sql)
+    
+            insert_sql = insert_sql.replace('"', '`')  # MySQL-safe quoting
+            insert_sql += f" ON DUPLICATE KEY UPDATE {upsert_on_condition}"
+
+        insert_sql = sqlalchemy.text(insert_sql)
 
         self.logger.debug("Inserting with SQL: %s", insert_sql)
 
