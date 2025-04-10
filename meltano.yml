@@ -37,4 +37,14 @@ plugins:
       label: Use snake_case for table and column names
       description: Converts names like 'tabPatient' to 'tab_patient' if true.
       value: false  # Optional default
+    - name: move_leading_underscores
+      kind: boolean
+      label: move leading underscores to the end
+      description: Converts column names like '_name' to 'name_' if true.
+      value: false  # Optional default
+    # - name: replace_leading_digit
+    #   kind: boolean
+    #   label: replace leading digit
+    #   description: Converts names like 'tabPatient' to 'tab_patient' if true.
+    #   value: false  # Optional default
 
